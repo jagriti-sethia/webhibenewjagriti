@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Login from './component/login';
 import Userform from './component/userform';
+import Card from './component/card';
 
 // import { ToastContainer } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -18,7 +19,9 @@ function App() {
     <div className="App">
       {/* <Login /> */}
 
-      <Userform />
+      {/* <Userform /> */}
+      <Card />
+
       {/* <ToastContainer /> */}
     </div>
   );
