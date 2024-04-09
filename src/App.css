@@ -1,0 +1,33 @@
+.App {
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  padding-top: 4%;
+  padding-bottom: 10%;
+}
+
+form {
+  padding: 5%;
+
+}
+
+img {
+  width: 20%;
+  object-fit: contain;
+}
+
+span {
+  color: red;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
