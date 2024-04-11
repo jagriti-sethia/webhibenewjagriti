@@ -1,10 +1,44 @@
-.App {
-  text-align: center;
+form {
+  padding: 2%;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+span {
+  color: red;
+}
+
+
+.two {
+  display: grid;
+  place-content: center;
+}
+
+label {
+  font-weight: bold;
+
+}
+
+.imgtab {
+  width: 50px;
+  height: 50px;
+}
+
+.main,
+.lonig {
+  margin-top: 100px;
+}
+
+.cardtout {
+  display: flex;
+  /* flex-direction: row; */
+
+  padding: 5%;
+
+
+}
+
+.card {
+  margin: 2%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,6 +66,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import Main from './multistepform/main';
+import Userform from './component/userform';
+import Login from './component/login';
+import Header from './component/header';
+import Card from './component/card';
+import Output from './component/output';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className='two'>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/userform" element={<Userform />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cardapi" element={<Card />} />
+          <Route path="/output" element={<Output />} />
+
+        </Routes>
+      </div>
+
+
     </div>
   );
+
 }
 
 export default App;
