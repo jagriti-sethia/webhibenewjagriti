@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { add, sub } from '../Redux/Slice/PostSlice';
+import { add, sub } from '../Redux/Slice/cartSlice';
 // import toast from 'react-hot-toast';
 
 const Login = () => {
@@ -69,7 +69,8 @@ const Login = () => {
   return (
     <div className='lonig'>
       <h1>loginform</h1>
-      <button onClick={() => dispatch(add(true), sub())}>Increment</button>
+
+
       <form
         class='border border-primary'
         onSubmit={handlesubmit}

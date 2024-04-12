@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useSelector, useDispatch } from 'react-redux';
 import phm1 from '../assets/download.jpeg';
+import { addtopage, removefrompage } from '../Redux/Slice/cardSlice';
 
 const Card = () => {
-
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.card);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(4);
     const url = `https://jsonplaceholder.typicode.com/users?page=${currentPage}&limit=${itemsPerPage}`;
-
+    const [addbtn, setaddbtn] = useState('true')
     const [data, setData] = useState([]);
     const [search, setsearch] = useState("");
     const [searchd, setdsearch] = useState([]);
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const fetchData = () => {
         fetch(url)
@@ -68,6 +75,11 @@ const Card = () => {
 
     }
 
+    const isitemincart = (item) => {
+        return state.addedcard?.find((items) => items.name === item.name ? true : false);
+    }
+
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -93,6 +105,71 @@ const Card = () => {
                             <a href="#" class="card-link">{item.phone}</a>
                             <h6 class="card-subtitle mb-2 text-body-secondary">{item.email}</h6>
                         </div>
+                        {/* {isitemincart(item) ? <button onClick={() => {
+                            dispatch(removefrompage(item))
+                        }}> Remove </button> : <button onClick={() => {
+
+
+
+                            dispatch(addtopage(item))
+
+
+                        }}> add </button>} */}
+
+
+
+                        {/* inline button */}
+
+
+                        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group" role="group" aria-label="First group">
+                                {isitemincart(item) ? <button type="button" class="btn btn-secondary" onClick={() => {
+                                    dispatch(removefrompage(item))
+                                }}> Remove </button> : <button type="button" class="btn btn-secondary" onClick={() => {
+
+
+
+                                    dispatch(addtopage(item))
+
+
+                                }}> add </button>}
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-secondary" onClick={handleShow}>show details</button>
+                                </div>
+
+                                {/* modal component */}
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header >
+                                        <Modal.Title>{item.username}</Modal.Title>
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">{item.username}</h6>
+                                    </Modal.Header>
+                                    <Modal.Body ><div class="row g-0">
+                                        <img src={phm1} alt='cardph' class="img-fluid rounded-start col-md-4" />
+                                        <div class="col-md-6">
+                                            <div class="card-body" >
+                                                <p class="card-text">{item.address.street}--{item.address.city}</p>
+                                                <p class="card-text">{item.address.suite}--{item.address.zipcode}</p>
+                                                <p class="card-link">{item.phone}</p>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">{item.email}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Close
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                {/*  */}
+
+                            </div>
+                        </div>
+                        {/*  */}
+
+
                     </div>
 
                 ))}

@@ -42,6 +42,15 @@ const Header = () => {
                             <li class="nav-item">
                                 <Link to="/cardapi" class="nav-link ">  cardapiPage </Link>
                             </li>
+                            <li class="nav-item">
+                                <Link to="/addtocart" class="nav-link ">  product </Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link to="/cart" class="nav-link ">  cartpage </Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link to="/addedcards" class="nav-link ">  Addedcardpage </Link>
+                            </li>
 
                         </ul>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
+import { useSelector, useDispatch } from 'react-redux';
 
 const columns = [
     {
@@ -59,36 +60,39 @@ const columns = [
 // ]
 
 function Output() {
-    const location = useLocation();
-
-    console.log("location", location)
-    const [data, setdata] = useState([]);
+    // const location = useLocation();
+    const state = useSelector(state => state.cart);
+    console.log('state', state)
+    const [data, setdata] = useState(state.register);
 
 
     // localStorage.setItem("token", "myToken");
     // Retrieve data from local storage
 
     // console.log("locationddd", location)
-    // const dataObj = (data) => [...data, location.state];
+    // const dataObj = (data) => [...data, data];
 
-    useEffect(() => {
-        if (location.state) {
-            setdata(prev => [...prev, {
-                name: location.state?.name,
-                city: location.state?.city,
-                gender: location.state?.gender,
-                education: location.state?.education,
-                dateofbirth: location.state?.dateofbirth,
-                hobby: location.state?.hobby,
-                file: location.state?.file,
-                image: <img className='imgtab' src={location.state?.file} />
-            }])
+    // useEffect(() => {
+    //     if (data.length > 0) {
+    //         setdata(prev => [...prev, {
+    //             name: state.register?.name,
+    //             city: state.register?.city,
+    //             gender: state.register?.gender,
+    //             education: state.register?.education,
+    //             dateofbirth: state.register?.dateofbirth,
+    //             hobby: state.register?.hobby,
+    //             file: state.register?.file,
+    //             image: <img className='imgtab' src={state.register?.file} />
+    //         }])
+    //     }
 
-        }
 
-    }, [])
+    // }
 
-    console.log('locaddd', data);
+    //     , [])
+
+    // console.log('locaddd', state.register);
+    // console.log("location", data)
     return (
         <div>
             <div className="App">

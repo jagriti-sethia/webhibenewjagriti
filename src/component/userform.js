@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addtoregisteruser } from '../Redux/Slice/cartSlice';
 
 const Userform = () => {
+    const state = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
 
 
@@ -34,8 +39,8 @@ const Userform = () => {
         gender: '',
         dateofbirth: '',
         hobby: [],
-        file: ''
-
+        file: '',
+        id: ''
     }
 
     const [user, setuser] = useState(initValue)
@@ -98,7 +103,15 @@ const Userform = () => {
         } else {
             console.log(user);
             // setlist([...list, user]);
-            navigate('/output', { state: user })
+
+
+
+
+            dispatch(addtoregisteruser(user))
+
+
+
+            navigate('/output')
 
 
         }

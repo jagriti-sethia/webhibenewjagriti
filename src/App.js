@@ -8,6 +8,9 @@ import Login from './component/login';
 import Header from './component/header';
 import Card from './component/card';
 import Output from './component/output';
+import Items from './page/item';
+import Cart from './page/cart';
+import Addedcard from './page/addedcard';
 
 function App() {
 
@@ -21,6 +24,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cardapi" element={<Card />} />
           <Route path="/output" element={<Output />} />
+          <Route path="/addtocart" element={<Items />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/addedcards" element={< Addedcard />} />
+
 
         </Routes>
       </div>
