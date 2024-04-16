@@ -33,7 +33,11 @@ const columns = [
     },
     {
         name: 'Image',
-        selector: row => row.image,
+        selector: row =>row.image,
+    },
+    {
+        name: 'total',
+        selector: row => row.total
     },
 ];
 // const data = [

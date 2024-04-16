@@ -13,7 +13,8 @@ const CartSlice = createSlice({
             { name: "bread", unitPrice: 1.76 },
         ],
         cart: [],
-        register: []
+        register: [],
+        total: ''
     },
 
     reducers: {
@@ -26,6 +27,9 @@ const CartSlice = createSlice({
         // }
         addtoregisteruser: (state, action) => {
             state.register = [...state.register, action.payload];
+        },
+        fetch_total: (state,action) =>{
+            state.total = (action.payload)
         }
     },
 
@@ -35,5 +39,5 @@ const CartSlice = createSlice({
     // }
 })
 
-export const { addtocart, addtoregisteruser } = CartSlice.actions
+export const { addtocart, addtoregisteruser,fetch_total } = CartSlice.actions
 export default CartSlice.reducer

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addtoregisteruser } from '../Redux/Slice/cartSlice';
+import { addtoregisteruser,fetch_total } from '../Redux/Slice/cartSlice';
 
 const Userform = () => {
     const state = useSelector(state => state.cart);
@@ -20,7 +20,7 @@ const Userform = () => {
     const [show, setshow] = useState(false);
     const [file, setFile] = useState();
     const [arr, setArr] = useState([initArr]);
-
+    const [totalprice,settotalprice] = useState();
     const [err, seterr] = useState('false');
     const [errmsg, setmsg] = useState({});
     let error = {
@@ -39,7 +39,7 @@ const Userform = () => {
         gender: '',
         dateofbirth: '',
         hobby: [],
-        file: '',
+        image: '',
         id: ''
     }
 
@@ -110,7 +110,8 @@ const Userform = () => {
             dispatch(addtoregisteruser(user))
 
 
-
+            console.log("productarr", arr
+        );
             navigate('/output')
 
 
@@ -128,24 +129,23 @@ const Userform = () => {
 
 
     const addInput = () => {
+        
         setArr(s => {
             return [
                 ...s,
                 {
-
-
                     id: arr.length + 1
                 }
             ];
         });
-
+        console.log('array', arr)
 
     }
 
     const deleteTask = (id) => {
         setArr(arr.filter(task => task.id !== id));
     }
-
+   
     // add more
     const handleAddMore = (e, ind) => {
 
@@ -154,18 +154,29 @@ const Userform = () => {
 
             newArr[ind][e.target.name] = e.target.value;
             return newArr;
-        });
 
-    }
-    console.log("addwalaarray", arr)
+         });
+
+ }
+   
+   
+    
+
 
     function handleimage(e) {
         setshow(true)
         handlechange(e)
         console.log(e.target.files);
         // setFile(URL.createObjectURL(e.target.files[0]));
-        setuser(prev => ({ ...prev, file: URL.createObjectURL(e.target.files[0]) }))
+        setuser(prev => ({ ...prev, image: URL.createObjectURL(e.target.files[0]) }))
     }
+
+
+    useEffect(() => {
+     settotalprice(arr.reduce((acc,item)=> item?.prodprice === undefined ? acc : acc + Number(item.prodprice),0))
+     setuser(prev => ({ ...prev, total: totalprice }))
+     dispatch(fetch_total(totalprice))
+    },);
 
 
 
@@ -261,7 +272,7 @@ const Userform = () => {
                 {/* image input */}
                 <div class="mb-3"><input type="file" onChange={handleimage} accept="image/*" /></div>
                 <br />
-                {show && <img src={user?.file} />}
+                {show && <img className='showimm' src={user?.image} />}
                 {
                     show && <button type='button' className="inner-x" onClick={() => setshow(!show)}>
                         &times;
@@ -297,7 +308,7 @@ const Userform = () => {
                                             placeholder='product Name'
                                         />
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <input
                                             onChange={(e) => handleAddMore(e, ind)}
                                             value={item.prodtax}
@@ -308,15 +319,26 @@ const Userform = () => {
                                             placeholder='product tax'
                                         />
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <input
                                             onChange={(e) => handleAddMore(e, ind)}
                                             value={item.prodprice}
 
-                                            type='text'
+                                            type='number'
 
                                             name='prodprice'
                                             placeholder='product price'
+                                        />
+                                    </div>
+                                    <div class="col-2">
+                                        <input
+                                            // onChange={(e) => handleAddMore(e, ind)}
+                                            value= {Number(item.prodprice)+Number(item.prodtax)} 
+
+                                            type='number'
+
+                                            name='calculated'
+                                            placeholder='estimate price'
                                         />
                                     </div>
                                 </div>
@@ -325,6 +347,10 @@ const Userform = () => {
 
                         );
                     })}
+{/* {console.log('totalprice' , arr.reduce((acc,item)=> item?.prodprice === undefined ? acc : acc + Number(item.prodprice),0))} */}
+
+
+                    <button type='button' >show total:{totalprice}</button>
                 </div>
                 <br />
 
